@@ -114,9 +114,11 @@ void parseRes2(FILE *fp, char **drugs) {
           baselineExists = 1;
           int start = strlen(added)-2;
           char startStr[4];
+
           while (added[start] != '{') {
             start--;
           }
+
           int len = strlen(added) - start - 1 > 3 ? 4 : 3;
           strncpy(startStr, added+start+1, len);
           base = atoi(startStr);
@@ -208,14 +210,14 @@ void parseRes3(FILE *fp, char **drugs) {
 		char baseCount = 0;
         if (baselineExists) {
           for (int i = 0; i < 3; i++) {
-	    	char isInBase = 0;
-	    	for (int j = 0; j < baseLen; j++) {
-				if (addedList[i] == base[j]) {
-					baseCount++;
-					isInBase = 1;
-					break;
-				}
-			}
+	    char isInBase = 0;
+	    for (int j = 0; j < baseLen; j++) {
+		if (addedList[i] == base[j]) {
+			baseCount++;
+			isInBase = 1;
+			break;
+		}
+	    }
 
             if (!isInBase) {
               fprintf(out, "%s", drugs[addedList[i]-1]);
@@ -226,6 +228,7 @@ void parseRes3(FILE *fp, char **drugs) {
               }
             }
           }
+
           for (int i = 0; i < baseLen-1; i++) {
             fprintf(out, "%s,", drugs[base[i]-1]);
           }
