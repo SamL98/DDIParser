@@ -165,7 +165,7 @@ void parseRes3(FILE *fp, char **drugs) {
     }
 
     while (!feof(fp)) {
-	    char baselineExists = 0;
+	char baselineExists = 0;
     	int base[2], baseLen;
 
         fscanf(fp, "%s", addedPtr);
@@ -207,16 +207,17 @@ void parseRes3(FILE *fp, char **drugs) {
         addedStrList = strtok(NULL, ",");
         addedList[2] = atoi(addedStrList);
 
-		char baseCount = 0;
+	char baseCount = 0;
         if (baselineExists) {
           for (int i = 0; i < 3; i++) {
 	    char isInBase = 0;
+
 	    for (int j = 0; j < baseLen; j++) {
-		if (addedList[i] == base[j]) {
-			baseCount++;
-			isInBase = 1;
-			break;
-		}
+	      if (addedList[i] == base[j]) {
+		baseCount++;
+		isInBase = 1;
+		break;
+	      }
 	    }
 
             if (!isInBase) {
@@ -232,6 +233,7 @@ void parseRes3(FILE *fp, char **drugs) {
           for (int i = 0; i < baseLen-1; i++) {
             fprintf(out, "%s,", drugs[base[i]-1]);
           }
+
           fprintf(out, "%s\t%.4f\n", drugs[base[baseLen-1]-1], or);
           continue;
         }
